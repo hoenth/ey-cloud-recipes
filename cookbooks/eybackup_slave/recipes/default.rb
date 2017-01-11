@@ -5,7 +5,8 @@
 
 # backups disabled?
 if node[:backup_window].to_s == "0"
-  raise "Backups are disabled for this environment"
+  Chef::Log.info "Backups are disabled for this environment; skipping eybackup_slave recipe."
+  return
 end
 
 # database is mysql? (EY Cloud already sets up eybackup on the slave for postgres)
@@ -26,9 +27,7 @@ if db_slave
 
     # check for encryption
     if node[:encrypted_backups]
-      # gnupg package
       package "app-crypt/gnupg" do
-        version '2.0.9'
         action :install
       end
 

@@ -158,3 +158,7 @@
   # postgresql9_pg_buffercache "postgres"
   # postgresql9_pg_freespacemap "postgres"
 # end
+
+# manages delayed_job using monit
+include_recipe "delayed_job"
+
